@@ -6,14 +6,17 @@ export interface Tile {
   position: [number, number];
 }
 
-export function initializeGame(): Tile[] {
+export function initializeGame(gridSize: number,newTileValue:number): Tile[] {
+  if (gridSize <= 1) {
+    throw new Error("Grid size must be greater than 1");
+  }
   const tiles: Tile[] = [];
-  addRandomTile(tiles);
-  addRandomTile(tiles);
+  addRandomTile(tiles,newTileValue);
+  addRandomTile(tiles,newTileValue);
   return tiles;
 }
 
-export function addRandomTile(tiles: Tile[]): void {
+export function addRandomTile(tiles: Tile[],newTileValue:number): void {
   const emptyPositions: [number, number][] = [];
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
@@ -27,7 +30,7 @@ export function addRandomTile(tiles: Tile[]): void {
     const [row, col] = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
     tiles.push({
       id: Math.random(),
-      value: Math.random() < 0.9 ? 2 : 4,
+      value: newTileValue,
       position: [row, col],
     });
   }

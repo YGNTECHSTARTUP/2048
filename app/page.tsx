@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
 import Game2048 from '../components/Game2048';
-import GridBackgroundDemo from './comp/GridBackground';
+import GridBackgroundDemo from '../components/ui/GridBackground';
 import OnboardingPage from '@/components/OnboardingPage';
 
 export default function Home() {
