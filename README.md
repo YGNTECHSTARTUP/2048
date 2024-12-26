@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<h1 align="center" id="title">2048 Game</h1>
 
-## Getting Started
+<p align="center"><img src="https://socialify.git.ci/YGNTECHSTARTUP/2048/image?language=1&amp;owner=1&amp;name=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
 
-First, run the development server:
+<p id="description">A customizable 2048 game with swipe controls keyboard support and smooth animations built using React Next.js and Framer Motion.</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<h2>🚀 Demo</h2>
+
+[https://2048-ygns.vercel.app/](https://2048-ygns.vercel.app/)
+
+  
+  
+<h2>🧐 Features</h2>
+
+Here're some of the project's best features:
+
+*   Swipe control using react-swipable
+*   Keyboard support for better navigation
+*   Full customization options via \`gameConfig\` in \`constants.ts\`
+*   Smooth animations using Framer Motion
+*   Dynamic tile colors and score based on value
+
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. Clone the repository:</p>
+
+```
+git clone https://github.com/YGNTECHSTARTUP
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<p>2. Change Directory</p>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+cd 2048
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<p>3. Install dependencies:</p>
 
-## Learn More
+```
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+<p>4. Run the development server:</p>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<p>5. Visit the game in your browser at [http://localhost:3000]</p>
 
-## Deploy on Vercel
+```
+(http://localhost:3000)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  
+  
+<h2>💻 Built with</h2>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Technologies used in the project:
+
+*   Nextjs
+*   Tailwind Css
+*   Shadcnui
+*   React Swipable
