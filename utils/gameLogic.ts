@@ -33,8 +33,12 @@ export function addRandomTile(tiles: Tile[]): void {
   }
 }
 
-export function moveTiles(tiles: Tile[], direction: Direction): { newTiles: Tile[], score: number } {
+export function moveTiles(
+  tiles: Tile[],
+  direction: Direction
+): { newTiles: Tile[]; score: number; hasWon: boolean } {
   let score = 0;
+  let hasWon = false;
   const newTiles: Tile[] = JSON.parse(JSON.stringify(tiles));
 
   const sortedTiles = newTiles.sort((a, b) => {
@@ -66,6 +70,11 @@ export function moveTiles(tiles: Tile[], direction: Direction): { newTiles: Tile
         if (targetTile.value === tile.value) {
           targetTile.value *= 2;
           score += targetTile.value;
+
+          if (targetTile.value === 2048) {
+            hasWon = true;
+          }
+
           newTiles.splice(newTiles.indexOf(tile), 1);
         }
         break;
@@ -78,7 +87,7 @@ export function moveTiles(tiles: Tile[], direction: Direction): { newTiles: Tile
     tile.position = [row, col];
   }
 
-  return { newTiles, score };
+  return { newTiles, score, hasWon };
 }
 
 export function isGameOver(tiles: Tile[]): boolean {
@@ -109,4 +118,3 @@ export function isGameOver(tiles: Tile[]): boolean {
 
   return true;
 }
-

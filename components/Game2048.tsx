@@ -4,7 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
 import { initializeGame, moveTiles, addRandomTile, isGameOver, Direction, Tile as TileType } from '../utils/gameLogic';
-import LoseTryAgain from './ui/Lose';
+// import LoseTryAgain from './ui/Lose';
+// import Won from './ui/Won';
+import Endresult from './ui/EndResult';
 
 interface playername {
   PlayerName: string;
@@ -14,6 +16,7 @@ const Game2048 = ({ PlayerName }: playername) => {
   const [tiles, setTiles] = useState<TileType[]>(initializeGame());
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [iswon, setiswon] = useState(false);
   const getColorClass = () => {
     
     if (score === 0) return "text-gray-500"; // Zero
@@ -37,9 +40,10 @@ const Game2048 = ({ PlayerName }: playername) => {
   const handleMove = (direction: Direction) => {
     if (gameOver) return;
 
-    const { newTiles, score: newScore } = moveTiles(tiles, direction);
+    const { newTiles, score: newScore,hasWon} = moveTiles(tiles, direction);
     if (JSON.stringify(newTiles) !== JSON.stringify(tiles)) {
       addRandomTile(newTiles);
+      setiswon(hasWon);
       setTiles(newTiles);
       setScore(prevScore => prevScore + newScore);
 
@@ -93,33 +97,42 @@ const Game2048 = ({ PlayerName }: playername) => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-transparent">
-      
-        {gameOver ? (
-          <LoseTryAgain onrestart={resetGame}/>
-        ):<div className='flex flex-col items-center justify-center min-h-screen bg-transparent'>
-           <h1 className="text-sm md:text-xl lg:text-2xl xl:text-4xl font-bold mb-4 text-blue-800">Welcome {PlayerName}</h1>
-             <h1 className="text-4xl font-bold mb-4 text-blue-800">2048</h1>
-      <div className="mb-4 text-xl font-semibold text-blue-500">Score: <span className={`text-xl font-bold transition-colors duration-300 ${getColorClass()}`}>{score}</span></div>
-      <div
-        {...handlers}
-        className="relative w-[320px] h-[320px] bg-blue-200 rounded-lg overflow-hidden touch-none shadow-lg"
-      >
-        <div className="absolute inset-0 grid grid-cols-4 grid-rows-4 gap-2 p-2">
-          {Array.from({ length: 16 }).map((_, index) => (
-            <div key={index} className="bg-blue-300 rounded-md"></div>
-          ))}
-        </div>
-        {tiles.map(tile => (
-          <Tile key={tile.id} {...tile} />
+      {/* Without Component Reusabiility }{
+      gameOver ? ( <LoseTryAgain onrestart={resetGame} />) : iswon ? ( <Won onrestart={resetGame} playername={PlayerName} />) : ( <div className='flex flex-col items-center justify-center min-h-screen bg-transparent'>
+      }*/}
+      {gameOver ? (
+        <Endresult buttontext='Try Again' emoji='😢' onrestart={resetGame} quote="Don't give up! You can always try again." result={`Oops ${PlayerName} Lost`}   />
+) : iswon ? (
+  <Endresult buttontext='Play Again' emoji='😉' onrestart={resetGame} quote="Keep going, achieve more, win again—play on!" result={`Hooray ${PlayerName} Won`}   />
+) : (
+  <div className='flex flex-col items-center justify-center min-h-screen bg-transparent'>
+    <h1 className="text-sm md:text-xl lg:text-2xl xl:text-4xl font-bold mb-4 text-blue-800">
+      Welcome {PlayerName}
+    </h1>
+    <h1 className="text-4xl font-bold mb-4 text-blue-800">2048</h1>
+    <div className="mb-4 text-xl font-semibold text-blue-500">
+      Score: <span className={`text-xl font-bold transition-colors duration-300 ${getColorClass()}`}>{score}</span>
+    </div>
+    <div
+      {...handlers}
+      className="relative w-[320px] h-[320px] bg-blue-200 rounded-lg overflow-hidden touch-none shadow-lg"
+    >
+      <div className="absolute inset-0 grid grid-cols-4 grid-rows-4 gap-2 p-2">
+        {Array.from({ length: 16 }).map((_, index) => (
+          <div key={index} className="bg-blue-300 rounded-md"></div>
         ))}
       </div>
-      
-      <div className="mt-4 text-sm text-blue-600">
-        Use arrow keys or swipe to play 
-      </div>
+      {tiles.map(tile => (
+        <Tile key={tile.id} {...tile} />
+      ))}
     </div>
-  
-}
+
+    <div className="mt-4 text-sm text-blue-600">
+      Use arrow keys or swipe to play 
+    </div>
+  </div>
+)}
+
     </div>
       
    
