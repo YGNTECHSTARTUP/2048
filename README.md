@@ -19,6 +19,7 @@ Here're some of the project's best features:
 *   Full customization options via \`gameConfig\` in \`constants.ts\`
 *   Smooth animations using Framer Motion
 *   Dynamic tile colors and score based on value
+*   Used the Keyboard events for the Effective User Experience
 
 <h2>🛠️ Installation Steps:</h2>
 
